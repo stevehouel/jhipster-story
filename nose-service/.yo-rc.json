@@ -1,0 +1,31 @@
+{
+  "generator-jhipster": {
+    "jhipsterVersion": "4.1.1",
+    "baseName": "noseService",
+    "packageName": "io.github.jhipster.demo",
+    "packageFolder": "io/github/jhipster/demo",
+    "serverPort": "8081",
+    "authenticationType": "jwt",
+    "hibernateCache": "hazelcast",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "buildTool": "maven",
+    "jwtSecretKey": "8f3ffa768638d7a3662c7b5f4fe6c8f64ef8284d",
+    "enableTranslation": false,
+    "applicationType": "microservice",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "skipClient": true,
+    "skipUserManagement": true,
+    "clusteredHttpSession": false,
+    "websocket": false,
+    "enableSocialSignIn": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "clientFw": "angular1",
+    "clientFramework": "angular1",
+    "clientPackageManager": "yarn"
+  }
+}

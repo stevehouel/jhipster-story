@@ -1,0 +1,19 @@
+version: '2'
+services:
+    noseservice-app:
+        image: noseservice
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://noseservice-postgresql:5432/noseService
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+    noseservice-postgresql:
+        extends:
+            file: postgresql.yml
+            service: noseservice-postgresql
+    jhipster-registry:
+        extends:
+            file: jhipster-registry.yml
+            service: jhipster-registry
+        environment:
+            - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:./central-config/docker-config/

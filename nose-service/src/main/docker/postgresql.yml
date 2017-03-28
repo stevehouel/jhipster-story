@@ -1,0 +1,11 @@
+version: '2'
+services:
+    noseservice-postgresql:
+        image: postgres:9.5.4
+        # volumes:
+        #     - ~/volumes/jhipster/noseService/postgresql/:/var/lib/postgresql/
+        environment:
+            - POSTGRES_USER=noseService
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432

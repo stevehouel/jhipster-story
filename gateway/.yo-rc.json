@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "jhipsterVersion": "4.1.1",
+    "baseName": "gateway",
+    "packageName": "io.github.jhipster.demo",
+    "packageFolder": "io/github/jhipster/demo",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "hibernateCache": "no",
+    "clusteredHttpSession": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "elasticsearch",
+    "buildTool": "maven",
+    "jwtSecretKey": "2798b28b28db2882333d1fce738163caf096f010",
+    "useSass": false,
+    "applicationType": "gateway",
+    "testFrameworks": [
+      "gatling",
+      "protractor"
+    ],
+    "jhiPrefix": "jhi",
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": [
+      "en",
+      "fr"
+    ],
+    "enableSocialSignIn": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "yarn": true,
+    "clientPackageManager": "yarn",
+    "clientFramework": "angular2"
+  }
+}

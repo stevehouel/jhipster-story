@@ -1,0 +1,31 @@
+{
+  "generator-jhipster": {
+    "jhipsterVersion": "4.1.1",
+    "baseName": "lieService",
+    "packageName": "io.github.jhipster.demo",
+    "packageFolder": "io/github/jhipster/demo",
+    "serverPort": "8082",
+    "authenticationType": "jwt",
+    "hibernateCache": "no",
+    "databaseType": "mongodb",
+    "devDatabaseType": "mongodb",
+    "prodDatabaseType": "mongodb",
+    "searchEngine": false,
+    "buildTool": "maven",
+    "jwtSecretKey": "87b9f83bec1f9f48a09e8bffc49ddcfc8402c075",
+    "enableTranslation": false,
+    "applicationType": "microservice",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "skipClient": true,
+    "skipUserManagement": true,
+    "clusteredHttpSession": false,
+    "websocket": false,
+    "enableSocialSignIn": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "clientFw": "angular1",
+    "clientFramework": "angular1",
+    "clientPackageManager": "yarn"
+  }
+}

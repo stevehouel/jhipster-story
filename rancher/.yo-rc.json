@@ -1,0 +1,17 @@
+{
+  "generator-jhipster": {
+    "appsFolders": [
+      "gateway",
+      "lie-service",
+      "nose-service"
+    ],
+    "directoryPath": "../",
+    "monitoring": "elk",
+    "serviceDiscoveryType": "eureka",
+    "adminPassword": "admin",
+    "jwtSecretKey": "9995ae4b26edf823c15ccab095c35f2a5281e8cb",
+    "dockerRepositoryName": "stevehouel",
+    "dockerPushCommand": "docker push",
+    "enableRancherLoadBalancing": true
+  }
+}

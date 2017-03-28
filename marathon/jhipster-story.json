@@ -1,0 +1,129 @@
+{
+      "id": "/jhipster-story",
+      "groups": [
+          "id": "gateway",
+          "apps": [
+             {
+               "id": "gateway-app"
+               "container": {
+                 "type": "DOCKER",
+                 "docker": {
+                   "image": "stevehouel/gateway",
+                   "portMappings": [
+                       {
+                           "containerPort": 8080,
+                           "hostPort": 8080,
+                           "protocol": "tcp"
+                       }
+                   ]
+                 },
+
+             },
+             "instances": 1,
+             "env": {
+                 "JHIPSTER_REGISTRY_PASSWORD": "admin",
+                 "JHIPSTER_SLEEP": "30",
+                 "SPRING_CLOUD_CONFIG_URI": "http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config",
+                 "SPRING_DATASOURCE_URL": "jdbc:mysql://gateway-mysql:3306/gateway?useUnicode=true&characterEncoding=utf8&useSSL=false",
+                 "SPRING_DATA_CASSANDRA_CONTACTPOINTS": "gateway-cassandra",
+                 "SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES": "gateway-elasticsearch:9300",
+                 "SPRING_PROFILES_ACTIVE": "prod,swagger"
+             },
+             "requirePorts": true
+           },
+           {
+             "container": {
+                 "docker": {
+                     "image": "elasticsearch:2.4.1",
+                     "network": "BRIDGE"
+                 },
+                 "type": "DOCKER"
+             },
+             "id": "gateway-elasticsearch",
+             "instances": 1,
+             "requirePorts": true
+           },
+           {
+             "args": [
+                 "mysqld",
+                 "--lower_case_table_names=1",
+                 "--skip-ssl",
+                 "--character_set_server=utf8"
+             ],
+             "container": {
+                 "docker": {
+                     "image": "mysql:5.7.13",
+                     "network": "BRIDGE"
+                 },
+                 "type": "DOCKER"
+             },
+             "env": {
+                 "MYSQL_ALLOW_EMPTY_PASSWORD": "yes",
+                 "MYSQL_DATABASE": "gateway",
+                 "MYSQL_USER": "root"
+             },
+             "id": "gateway-mysql",
+             "instances": 1,
+             "requirePorts": true
+           }
+          ]
+      ]
+      "apps":[
+            {
+              "container": {
+                "type": "DOCKER",
+                "docker": {
+                  "image": "busybox",
+                  "privileged": true,
+                  "network": "BRIDGE",
+                  "parameters": [
+                      { "key": "tty", "value": "true" }
+                  ],
+                  "portMappings": [
+                            {
+                                "containerPort": 80,
+                                "hostPort": 0,
+                                "protocol": "tcp"
+                            }
+                        ]
+                },
+                "volumes": [
+                        {
+                                "containerPath": "/var/www",
+                                "hostPath": "/tmp",
+                                "mode": "RW"
+                        }
+                ]
+              },
+              "id": "my-node-js-app",
+              "instances": 2,
+              "dependencies": ["/product/database"],
+              "cpus": 1,
+              "mem": 256
+            }
+      ]
+   },
+  {
+      "id": "database",
+      "apps":[
+            {
+              "container": {
+                "type": "DOCKER",
+                "docker": {
+                  "image": "busybox",
+                  "network": "BRIDGE",
+                  "privileged": true,
+                  "parameters": [
+                      { "key": "tty", "value": "true" }
+                  ]
+                }
+              },
+              "id": "database",
+              "instances": 2,
+              "cpus": 1,
+              "mem": 64
+            }
+      ]
+   }
+   ]
+}
