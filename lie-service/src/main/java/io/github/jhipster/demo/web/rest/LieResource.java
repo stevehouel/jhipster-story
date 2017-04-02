@@ -11,8 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
+import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,12 +29,14 @@ public class LieResource {
     private final Logger log = LoggerFactory.getLogger(LieResource.class);
 
     private static final String ENTITY_NAME = "lie";
-        
+
     private final LieRepository lieRepository;
 
     public LieResource(LieRepository lieRepository) {
         this.lieRepository = lieRepository;
     }
+
+
 
     /**
      * POST  /lies : Create a new lie.
@@ -103,6 +108,20 @@ public class LieResource {
     }
 
     /**
+     * GET
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the lie, or with status 404 (Not Found)
+     */
+    @GetMapping("/lies/request")
+    @Timed
+    public String getLieRequest() throws UnknownHostException, InterruptedException {
+        log.debug("REST request to get Lie request");
+        this.doLie();
+        return "Hello I'm " + InetAddress.getLocalHost().getHostName();
+    }
+
+
+    /**
      * DELETE  /lies/:id : delete the "id" lie.
      *
      * @param id the id of the lie to delete
@@ -114,6 +133,10 @@ public class LieResource {
         log.debug("REST request to delete Lie : {}", id);
         lieRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    private synchronized void doLie() throws InterruptedException {
+        Thread.sleep(100);
     }
 
 }

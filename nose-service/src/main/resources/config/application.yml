@@ -34,8 +34,12 @@ eureka:
             profile: ${spring.profiles.active}
             version: ${info.project.version}
 ribbon:
+    ReadTimeout: 6000
     eureka:
         enabled: true
+feign:
+    hystrix:
+        enabled: false
 # See https://github.com/Netflix/Hystrix/wiki/Configuration
 #hystrix:
 #    command:

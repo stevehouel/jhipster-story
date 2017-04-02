@@ -6,6 +6,7 @@ import { Ng2Webstorage } from 'ng2-webstorage';
 
 import { GatewaySharedModule, UserRouteAccessService } from './shared';
 import { GatewayHomeModule } from './home/home.module';
+import { GatewayGraphModule } from './graph/graph.module';
 import { GatewayAdminModule } from './admin/admin.module';
 import { GatewayAccountModule } from './account/account.module';
 import { GatewayEntityModule } from './entities/entity.module';
@@ -32,9 +33,10 @@ import {
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
         GatewaySharedModule,
         GatewayHomeModule,
+        GatewayGraphModule,
         GatewayAdminModule,
         GatewayAccountModule,
-        GatewayEntityModule
+        GatewayEntityModule,
     ],
     declarations: [
         JhiMainComponent,
