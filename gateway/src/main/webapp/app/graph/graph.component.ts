@@ -23,7 +23,7 @@ export class GraphComponent {
         this.jhiLanguageService.setLocations(['global']);
         this.options = {
           chart: { type: 'spline' },
-          title: { text : 'dynamic data example'},
+          title: { text : 'Lies'},
           series: [{ data: [] }]
         };
         setInterval(() => {

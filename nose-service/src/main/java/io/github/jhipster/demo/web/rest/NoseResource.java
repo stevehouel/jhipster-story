@@ -23,17 +23,17 @@ public class NoseResource {
         this.queryCounter = queryCounter;
     }
 
-    @RequestMapping(value = "/qps")
+    @GetMapping(value = "/qps")
     public Map<String, Integer> getMeanQps() {
         return queryCounter.getQps();
     }
 
-    @RequestMapping(value = "/qpsSinceStarted")
+    @GetMapping(value = "/qpsSinceStarted")
     public Float getMeanQpsSinceStarted() {
         return queryCounter.getQpsSinceStarted();
     }
 
-    @RequestMapping(value = "/lastSecQps")
+    @GetMapping(value = "/lastSecQps")
     public Integer getLastSecQps() {
         return queryCounter.getLastSecCount();
     }
