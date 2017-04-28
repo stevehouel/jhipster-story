@@ -36,6 +36,8 @@ eureka:
 ribbon:
     eureka:
         enabled: true
+    client:
+        name: gateway
 zuul:
     host:
         connect-timeout-millis: 5000

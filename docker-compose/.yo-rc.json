@@ -1,0 +1,15 @@
+{
+  "generator-jhipster": {
+    "appsFolders": [
+      "gateway",
+      "lie-service",
+      "nose-service"
+    ],
+    "directoryPath": "../",
+    "clusteredDbApps": [],
+    "monitoring": "no",
+    "serviceDiscoveryType": "eureka",
+    "adminPassword": "admin",
+    "jwtSecretKey": "35e5698cc3c34142adcf2c2c1f3b6cad24f9163b"
+  }
+}

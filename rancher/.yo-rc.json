@@ -1,0 +1,17 @@
+{
+  "generator-jhipster": {
+    "appsFolders": [
+      "gateway",
+      "lie-service",
+      "nose-service"
+    ],
+    "directoryPath": "../",
+    "monitoring": "no",
+    "serviceDiscoveryType": "eureka",
+    "adminPassword": "admin",
+    "jwtSecretKey": "cea1a1620165570a6425afd0f0d1cc8aeace1940",
+    "dockerRepositoryName": "registry.containers.ovh.net/jhipster-story",
+    "dockerPushCommand": "docker push",
+    "enableRancherLoadBalancing": true
+  }
+}

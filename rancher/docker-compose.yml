@@ -1,0 +1,95 @@
+version: '2'
+services:
+    lb:
+      image: rancher/load-balancer-service
+      ports:
+        # Listen on public port 80 and direct traffic to private port 8080 of the service
+        - 80:8080
+      links:
+        # Target services in the same stack will be listed as a link
+        - gateway-app:gateway-app
+    gateway-app:
+        image: registry.containers.ovh.net/jhipster-story/gateway
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config
+            - SPRING_DATASOURCE_URL=jdbc:mysql://gateway-mysql:3306/gateway?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - SPRING_DATA_CASSANDRA_CONTACTPOINTS=gateway-cassandra
+            - JHIPSTER_SLEEP=30
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=gateway-elasticsearch:9300
+            - EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka
+            - JHIPSTER_REGISTRY_PASSWORD=admin
+        ports:
+            - 8080:8080
+    gateway-mysql:
+        image: mysql:5.7.13
+        environment:
+            - MYSQL_USER=root
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_DATABASE=gateway
+        command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8
+    gateway-elasticsearch:
+        image: elasticsearch:2.4.1
+    
+    lieservice-app:
+        image: registry.containers.ovh.net/jhipster-story/lieservice
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config
+            - EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka
+            - SPRING_DATA_MONGODB_URI=mongodb://lieservice-mongodb:27017
+            - SPRING_DATA_MONGODB_DATABASE=lieService
+            - JHIPSTER_SLEEP=10
+            - JHIPSTER_REGISTRY_PASSWORD=admin
+    lieservice-mongodb:
+        image: mongo:3.2.10
+    
+    noseservice-app:
+        image: registry.containers.ovh.net/jhipster-story/noseservice
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config
+            - EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://noseservice-postgresql:5432/noseService
+            - JHIPSTER_SLEEP=10
+            - JHIPSTER_REGISTRY_PASSWORD=admin
+    noseservice-postgresql:
+        image: postgres:9.5.4
+        environment:
+            - POSTGRES_USER=noseService
+            - POSTGRES_PASSWORD=
+    
+    jhipster-registry:
+        image: jhipster/jhipster-registry:v2.6.0
+        #volumes:
+        #    - ./central-server-config:/central-config
+        # By default the JHipster Registry runs with the "prod" and "native"
+        # Spring profiles.
+        # "native" profile means the filesystem is used to store data, see
+        # http://cloud.spring.io/spring-cloud-config/spring-cloud-config.html
+        environment:
+            - SPRING_PROFILES_ACTIVE=dev,native
+            - SECURITY_USER_PASSWORD=admin
+            - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:./config/
+            # Uncomment to use a git configuration source instead of the local filesystem
+            # mounted from the registry-config-sidekick volume
+            # - GIT_URI=https://github.com/jhipster/jhipster-registry/
+            # - GIT_SEARCH_PATHS=central-config
+        ports:
+            - 8761:8761
+        volumes:
+          - /config
+        volumes_from:
+          - registry-config-sidekick
+        labels:
+          io.rancher.sidekicks: registry-config-sidekick
+    registry-config-sidekick:
+        # this docker image must be built with:
+        # docker build -t registry.containers.ovh.net/jhipster-story/registry-config-sidekick registry-config-sidekick
+        image: registry.containers.ovh.net/jhipster-story/registry-config-sidekick
+        tty: true
+        stdin_open: true
+        command:
+          - cat
+        volumes:
+          - config:/config

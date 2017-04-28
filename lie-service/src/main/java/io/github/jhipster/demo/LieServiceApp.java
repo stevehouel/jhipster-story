@@ -27,7 +27,6 @@ import java.util.Collection;
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
 @EnableConfigurationProperties({ApplicationProperties.class})
 @EnableDiscoveryClient
-@EnableFeignClients
 public class LieServiceApp {
 
     private static final Logger log = LoggerFactory.getLogger(LieServiceApp.class);
