@@ -15,7 +15,7 @@
 
 eureka:
     client:
-        enabled: false
+        enabled: true
     instance:
         appname: lieService
         instanceId: lieService:${spring.application.instance-id:${random.value}}

@@ -5,7 +5,6 @@ import io.github.jhipster.demo.config.DefaultProfileUtil;
 
 import io.github.jhipster.config.JHipsterConstants;
 
-import io.github.jhipster.demo.config.ribbon.RibbonConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +15,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
@@ -25,7 +23,7 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
 
-@ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.ASPECTJ, pattern = "io.github.jhipster.demo.config.ribbon.*"))
+@ComponentScan
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
 @EnableDiscoveryClient
@@ -88,9 +86,6 @@ public class NoseServiceApp {
             env.getActiveProfiles());
 
         String configServerStatus = env.getProperty("configserver.status");
-        //Keep alive http connection when sleeping
-        System.setProperty("http.keepAlive", "false");
-
         log.info("\n----------------------------------------------------------\n\t" +
                 "Config Server: \t{}\n----------------------------------------------------------",
             configServerStatus == null ? "Not found or not setup for this application" : configServerStatus);

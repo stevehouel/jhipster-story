@@ -20,6 +20,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.serviceregistry.Registration;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 
@@ -37,11 +38,14 @@ public class CacheConfiguration {
 
     private final DiscoveryClient discoveryClient;
 
+    private final Registration registration;
+
     private final ServerProperties serverProperties;
 
-    public CacheConfiguration(Environment env, DiscoveryClient discoveryClient, ServerProperties serverProperties) {
+    public CacheConfiguration(Environment env, DiscoveryClient discoveryClient, Registration registration, ServerProperties serverProperties) {
         this.env = env;
         this.discoveryClient = discoveryClient;
+        this.registration = registration;
         this.serverProperties = serverProperties;
     }
 
@@ -61,10 +65,17 @@ public class CacheConfiguration {
     @Bean
     public HazelcastInstance hazelcastInstance(JHipsterProperties jHipsterProperties) {
         log.debug("Configuring Hazelcast");
+
+        HazelcastInstance hazelCastInstance = Hazelcast.getHazelcastInstanceByName("noseService");
+        if (hazelCastInstance != null) {
+            log.debug("Hazelcast already initialized");
+            return hazelCastInstance;
+        }
+
         Config config = new Config();
         config.setInstanceName("noseService");
         // The serviceId is by default the application's name, see Spring Boot's eureka.instance.appname property
-        String serviceId = discoveryClient.getLocalServiceInstance().getServiceId();
+        String serviceId = registration.getServiceId();
         log.debug("Configuring Hazelcast clustering for instanceId: {}", serviceId);
 
         // In development, everything goes through 127.0.0.1, with a different port

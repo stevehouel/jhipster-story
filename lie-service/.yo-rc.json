@@ -1,6 +1,6 @@
 {
   "generator-jhipster": {
-    "jhipsterVersion": "4.1.1",
+    "jhipsterVersion": "4.3.0",
     "baseName": "lieService",
     "packageName": "io.github.jhipster.demo",
     "packageFolder": "io/github/jhipster/demo",

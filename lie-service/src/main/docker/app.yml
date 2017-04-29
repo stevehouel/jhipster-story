@@ -4,8 +4,8 @@ services:
         image: lieservice
         environment:
             - SPRING_PROFILES_ACTIVE=prod,swagger
-            - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config
             - EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka
+            - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config
             - SPRING_DATA_MONGODB_URI=mongodb://lieservice-mongodb:27017
             - SPRING_DATA_MONGODB_DATABASE=lieService
             - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application

@@ -15,7 +15,7 @@
 
 eureka:
     client:
-        enabled: false
+        enabled: true
     instance:
         appname: gateway
         instanceId: gateway:${spring.application.instance-id:${random.value}}

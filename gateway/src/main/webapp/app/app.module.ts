@@ -11,12 +11,12 @@ import { GatewayAdminModule } from './admin/admin.module';
 import { GatewayAccountModule } from './account/account.module';
 import { GatewayEntityModule } from './entities/entity.module';
 
-import { LayoutRoutingModule } from './layouts';
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 
 import {
     JhiMainComponent,
+    LayoutRoutingModule,
     NavbarComponent,
     FooterComponent,
     ProfileService,
@@ -25,7 +25,6 @@ import {
     ErrorComponent
 } from './layouts';
 
-
 @NgModule({
     imports: [
         BrowserModule,
@@ -33,10 +32,10 @@ import {
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
         GatewaySharedModule,
         GatewayHomeModule,
-        GatewayGraphModule,
         GatewayAdminModule,
         GatewayAccountModule,
         GatewayEntityModule,
+        GatewayGraphModule
     ],
     declarations: [
         JhiMainComponent,
@@ -48,8 +47,6 @@ import {
     ],
     providers: [
         ProfileService,
-        { provide: Window, useValue: window },
-        { provide: Document, useValue: document },
         customHttpProvider(),
         PaginationConfig,
         UserRouteAccessService

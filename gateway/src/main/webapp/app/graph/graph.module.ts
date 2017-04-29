@@ -7,12 +7,11 @@ import { GRAPH_ROUTE, GraphComponent, GraphService } from './';
 
 import { ChartModule } from 'angular2-highcharts';
 
-
 @NgModule({
     imports: [
         GatewaySharedModule,
+        RouterModule.forRoot([ GRAPH_ROUTE ], { useHash: true }),
         ChartModule.forRoot(require('highcharts')),
-        RouterModule.forRoot([ GRAPH_ROUTE ], { useHash: true })
     ],
     declarations: [
         GraphComponent,

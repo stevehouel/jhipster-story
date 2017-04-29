@@ -9,12 +9,12 @@ services:
         image: gateway
         environment:
             - SPRING_PROFILES_ACTIVE=prod,swagger
+            - EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka
             - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config
             - SPRING_DATASOURCE_URL=jdbc:mysql://gateway-mysql:3306/gateway?useUnicode=true&characterEncoding=utf8&useSSL=false
             - SPRING_DATA_CASSANDRA_CONTACTPOINTS=gateway-cassandra
             - JHIPSTER_SLEEP=30 # gives time for the Cassandra cluster to start and execute the migration scripts
             - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=gateway-elasticsearch:9300
-            - EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka
         ports:
             - 8080:8080
     gateway-mysql:

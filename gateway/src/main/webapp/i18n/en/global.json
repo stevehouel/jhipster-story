@@ -32,7 +32,6 @@
                 "database": "Database",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
-            "graph": "Graph",
             "language": "Language"
         },
         "form": {
@@ -42,8 +41,8 @@
             "newpassword.placeholder": "New password",
             "confirmpassword": "New password confirmation",
             "confirmpassword.placeholder": "Confirm the new password",
-            "email": "E-mail",
-            "email.placeholder": "Your e-mail"
+            "email": "Email",
+            "email.placeholder": "Your email"
         },
         "messages": {
             "info": {
@@ -73,10 +72,10 @@
                     "maxlength": "Your confirmation password cannot be longer than 50 characters."
                 },
                 "email": {
-                    "required": "Your e-mail is required.",
-                    "invalid": "Your e-mail is invalid.",
-                    "minlength": "Your e-mail is required to be at least 5 characters.",
-                    "maxlength": "Your e-mail cannot be longer than 50 characters."
+                    "required": "Your email is required.",
+                    "invalid": "Your email is invalid.",
+                    "minlength": "Your email is required to be at least 5 characters.",
+                    "maxlength": "Your email cannot be longer than 50 characters."
                 }
             }
         },
@@ -114,7 +113,7 @@
             "max": "This field cannot be more than {{ max }}.",
             "minbytes": "This field should be at least {{ min }} bytes.",
             "maxbytes": "This field cannot be more than {{ max }} bytes.",
-            "pattern": "This field should follow pattern {{ pattern }}.",
+            "pattern": "This field should follow pattern for {{ pattern }}.",
             "number": "This field should be a number.",
             "datetimelocal": "This field should be a date and time."
         }
@@ -126,7 +125,7 @@
         "NotNull": "Field {{ fieldName }} cannot be empty!",
         "Size": "Field {{ fieldName }} does not meet min/max size requirements!",
         "userexists": "Login name already used!",
-        "emailexists": "E-mail is already in use!",
+        "emailexists": "Email is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID"
     },
     "footer": "This is your footer"

@@ -12,5 +12,4 @@ export class GraphService {
         return this.http.get(this.resourceUrl);
     }
 
-
 }

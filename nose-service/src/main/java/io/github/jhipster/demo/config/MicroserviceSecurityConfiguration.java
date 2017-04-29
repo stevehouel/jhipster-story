@@ -53,7 +53,6 @@ public class MicroserviceSecurityConfiguration extends WebSecurityConfigurerAdap
         .and()
             .authorizeRequests()
             .antMatchers("/api/**").permitAll()
-            .antMatchers("/v2/api-docs/**").permitAll()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/swagger-resources/configuration/ui").permitAll()

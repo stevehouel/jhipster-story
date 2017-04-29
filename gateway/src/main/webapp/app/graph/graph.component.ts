@@ -13,8 +13,8 @@ import { GraphService } from './graph.service';
 
 })
 export class GraphComponent {
-    private chart : any;
-    private options: any;
+    private chart: any;
+    public options: any;
 
     constructor(
         private jhiLanguageService: JhiLanguageService,
